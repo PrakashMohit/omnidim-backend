@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify
-from omnidim import OmnidimClient
+from omnidimension import OmnidimClient
 import os
 
 app = Flask(__name__)
