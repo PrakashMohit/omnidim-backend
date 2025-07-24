@@ -1,10 +1,10 @@
 from flask import Flask, request, jsonify
-from omnidimension import OmnidimClient
+from omnidimension import Client
 import os
 
 app = Flask(__name__)
 
-client = OmnidimClient(api_key=os.environ.get("OMNIDIM_API_KEY"))
+client = Client(api_key=os.environ.get("OMNIDIM_API_KEY"))
 
 @app.route("/api/ask", methods=["POST"])
 def ask():
