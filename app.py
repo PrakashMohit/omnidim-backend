@@ -4,10 +4,10 @@ import os
 from flask_cors import CORS
 
 app = Flask(__name__)
-CORS(app, resources={r"/*": {"origins": "*"}})  # 👈 enable CORS for all origins
+CORS(app, supports_credentials=True)   # 👈 enable CORS for all origins
 
 
-app = Flask(__name__)
+
 
 client = Client(api_key=os.environ.get("OMNIDIM_API_KEY"))
 
