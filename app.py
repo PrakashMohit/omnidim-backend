@@ -20,11 +20,28 @@ def ask():
         return jsonify({"error": "No prompt provided"}), 400
 
     try:
+        print("Prompt received:", prompt)
         response = client.send(text=prompt)
-        reply = response.get("reply", "")
-        return jsonify({"reply": reply})
+
+        # DEBUG: log what's actually returned
+        print("Type:", type(response))
+        print("Raw response:", response)
+
+        # Handle if Omnidim returns string directly
+        if isinstance(response, str):
+            return jsonify({ "reply": response })
+
+        # Handle if it's a dict or object with .get()
+        if hasattr(response, "get"):
+            return jsonify({ "reply": response.get("reply", "") })
+
+        # Fallback — just stringify whatever it returned
+        return jsonify({ "reply": str(response) })
+
     except Exception as e:
-        return jsonify({"error": str(e)}), 500
+        print("Error:", str(e))
+        return jsonify({ "error": str(e) }), 500
+
 
 @app.route("/")
 def home():
