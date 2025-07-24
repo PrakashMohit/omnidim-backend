@@ -1,6 +1,11 @@
 from flask import Flask, request, jsonify
 from omnidimension import Client
 import os
+from flask_cors import CORS
+
+app = Flask(__name__)
+CORS(app)  # 👈 enable CORS for all origins
+
 
 app = Flask(__name__)
 
